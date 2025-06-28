@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Coins, Banknote, Building2, Wifi, WifiOff, Loader2 } from 'lucide-react';
 import CoinSelector from './CoinSelector';
@@ -192,14 +191,17 @@ const CoinChangeCalculator: React.FC = () => {
         {/* Bank Building Container */}
         <div className="relative mb-8 animate-scale-in">
           {/* Bank Building */}
-          <div className="bg-gradient-to-b from-gray-100 to-gray-200 rounded-t-3xl shadow-2xl border-8 border-gray-300 relative overflow-hidden">
-            {/* Bank Roof */}
-            <div className="h-6 bg-gradient-to-r from-red-700 to-red-800 relative">
-              <div className="absolute inset-0 bg-gradient-to-t from-red-900/20 to-transparent"></div>
+          <div className="relative bg-gradient-to-b from-stone-200 to-stone-300 rounded-t-2xl shadow-2xl overflow-hidden">
+            
+            {/* Bank Roof with Triangle */}
+            <div className="relative h-16 bg-gradient-to-b from-slate-600 to-slate-700 clip-path-triangle">
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-800/20 to-transparent"></div>
+              {/* Roof ornament */}
+              <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-6 h-8 bg-gradient-to-b from-yellow-400 to-yellow-600 rounded-t-full"></div>
             </div>
             
             {/* Bank Sign */}
-            <div className="bg-gradient-to-r from-blue-800 to-blue-900 text-white text-center py-4 relative">
+            <div className="bg-gradient-to-r from-blue-800 to-blue-900 text-white text-center py-4 relative border-t-4 border-yellow-400">
               <div className="absolute inset-0 bg-gradient-to-t from-blue-950/30 to-transparent"></div>
               <h2 className="text-2xl font-bold relative z-10 flex items-center justify-center gap-2">
                 <Coins className="w-6 h-6" />
@@ -208,14 +210,45 @@ const CoinChangeCalculator: React.FC = () => {
               </h2>
             </div>
 
-            {/* Bank Interior */}
-            <div className="p-8 bg-gradient-to-b from-amber-50 to-yellow-50 relative">
-              {/* Decorative columns */}
-              <div className="absolute left-4 top-0 bottom-0 w-2 bg-gradient-to-b from-gray-300 to-gray-400 opacity-30"></div>
-              <div className="absolute right-4 top-0 bottom-0 w-2 bg-gradient-to-b from-gray-300 to-gray-400 opacity-30"></div>
+            {/* Bank Facade with Columns */}
+            <div className="relative bg-gradient-to-b from-stone-100 to-stone-200">
+              {/* Classical Columns */}
+              <div className="absolute inset-0 flex justify-between px-8">
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="w-8 bg-gradient-to-b from-stone-300 to-stone-400 shadow-lg">
+                    {/* Column capital */}
+                    <div className="h-4 bg-gradient-to-b from-stone-200 to-stone-300 -mx-1 rounded-t-sm"></div>
+                    {/* Column shaft */}
+                    <div className="flex-1 bg-gradient-to-r from-stone-300 via-stone-200 to-stone-300"></div>
+                    {/* Column base */}
+                    <div className="h-3 bg-gradient-to-b from-stone-300 to-stone-400 -mx-1"></div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Bank Windows */}
+              <div className="relative z-10 pt-8 pb-4">
+                <div className="flex justify-center gap-8 mb-4">
+                  {[...Array(3)].map((_, i) => (
+                    <div key={i} className="w-16 h-12 bg-gradient-to-b from-blue-900 to-blue-950 rounded-lg border-4 border-yellow-600 shadow-inner">
+                      <div className="w-full h-full bg-gradient-to-br from-blue-400/20 to-transparent rounded-sm"></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Bank Entrance/Interior */}
+            <div className="p-8 bg-gradient-to-b from-amber-50 to-yellow-50 relative min-h-[600px]">
+              {/* Marble floor pattern */}
+              <div className="absolute inset-0 opacity-10">
+                <div className="w-full h-full" style={{
+                  backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,0,0,0.1) 20px, rgba(0,0,0,0.1) 22px)`
+                }}></div>
+              </div>
               
               {/* Connection Status & API URL */}
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 relative z-10">
                 <div className="lg:col-span-2">
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Bank API Connection
@@ -224,12 +257,12 @@ const CoinChangeCalculator: React.FC = () => {
                     type="text"
                     value={apiUrl}
                     onChange={(e) => setApiUrl(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 font-mono text-sm"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 font-mono text-sm bg-white/90"
                     placeholder="http://localhost:8080"
                   />
                 </div>
                 <div className="flex flex-col justify-end">
-                  <div className="bg-white p-4 rounded-lg border-2 border-gray-200 flex items-center justify-between">
+                  <div className="bg-white/90 backdrop-blur-sm p-4 rounded-lg border-2 border-gray-200 flex items-center justify-between shadow-lg">
                     <div className="flex items-center gap-2">
                       {getConnectionIcon()}
                       <span className="font-medium text-sm">{getConnectionStatusText()}</span>
@@ -245,7 +278,7 @@ const CoinChangeCalculator: React.FC = () => {
               </div>
 
               {/* Amount Input */}
-              <div className="mb-8">
+              <div className="mb-8 relative z-10">
                 <label className="block text-lg font-semibold text-gray-700 mb-3">
                   Amount to Exchange ($)
                 </label>
@@ -260,24 +293,26 @@ const CoinChangeCalculator: React.FC = () => {
                     min="0"
                     max="10000"
                     step="0.01"
-                    className="w-full pl-10 pr-4 py-4 text-xl border-3 border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 bg-white shadow-inner"
+                    className="w-full pl-10 pr-4 py-4 text-xl border-3 border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 bg-white/90 shadow-inner backdrop-blur-sm"
                     placeholder="Enter amount (e.g., 0.41)"
                   />
                 </div>
               </div>
 
               {/* Coin Selection */}
-              <CoinSelector
-                validDenominations={validDenominations}
-                selectedDenominations={selectedDenominations}
-                onDenominationChange={handleDenominationChange}
-                onSelectAll={selectAllDenominations}
-                onClearAll={clearAllDenominations}
-                formatCurrency={formatCurrency}
-              />
+              <div className="relative z-10">
+                <CoinSelector
+                  validDenominations={validDenominations}
+                  selectedDenominations={selectedDenominations}
+                  onDenominationChange={handleDenominationChange}
+                  onSelectAll={selectAllDenominations}
+                  onClearAll={clearAllDenominations}
+                  formatCurrency={formatCurrency}
+                />
+              </div>
 
               {/* Action Buttons */}
-              <div className="flex gap-4 justify-center mb-8">
+              <div className="flex gap-4 justify-center mb-8 relative z-10">
                 <button
                   onClick={calculateCoins}
                   disabled={loading || connectionStatus === 'disconnected'}
@@ -309,8 +344,12 @@ const CoinChangeCalculator: React.FC = () => {
             </div>
           </div>
 
-          {/* Bank Foundation */}
-          <div className="h-4 bg-gradient-to-b from-gray-400 to-gray-500 rounded-b-lg shadow-lg"></div>
+          {/* Bank Foundation/Steps */}
+          <div className="relative">
+            <div className="h-6 bg-gradient-to-b from-stone-400 to-stone-500 rounded-b-lg shadow-lg"></div>
+            <div className="h-4 bg-gradient-to-b from-stone-500 to-stone-600 rounded-b-md shadow-lg mx-4"></div>
+            <div className="h-3 bg-gradient-to-b from-stone-600 to-stone-700 rounded-b-sm shadow-lg mx-8"></div>
+          </div>
         </div>
 
         {/* Error Display */}
