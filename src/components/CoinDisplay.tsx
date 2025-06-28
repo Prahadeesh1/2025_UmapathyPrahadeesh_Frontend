@@ -15,19 +15,19 @@ const CoinDisplay: React.FC<CoinDisplayProps> = ({
   formatCurrency,
 }) => {
   const getCoinColor = (value: number) => {
-    if (value >= 100) return 'from-green-400 to-green-600'; // Bills
+    if (value >= 100) return 'from-green-400 to-green-600'; // Bill
     if (value >= 50) return 'from-purple-400 to-purple-600'; // $50
-    if (value >= 10) return 'from-blue-400 to-blue-600'; // $10+
+    if (value >= 10) return 'from-blue-400 to-blue-600'; // $10
     if (value >= 5) return 'from-red-400 to-red-600'; // $5
-    if (value >= 1) return 'from-yellow-400 to-yellow-600'; // $1+
-    if (value >= 0.50) return 'from-gray-300 to-gray-500'; // 50¢+
-    if (value >= 0.10) return 'from-orange-300 to-orange-500'; // 10¢+
+    if (value >= 1) return 'from-yellow-400 to-yellow-600'; // $1
+    if (value >= 0.50) return 'from-gray-300 to-gray-500'; // 50¢
+    if (value >= 0.10) return 'from-orange-300 to-orange-500'; // 10¢
     return 'from-amber-300 to-amber-500'; // Pennies and nickels
   };
 
   const getCoinSize = (value: number) => {
-    if (value >= 100) return 'w-16 h-10'; // Bills (rectangular)
-    if (value >= 50) return 'w-14 h-14'; // Large denominations
+    if (value >= 100) return 'w-16 h-10'; // Bills
+    if (value >= 50) return 'w-14 h-14'; // Large denomination
     if (value >= 10) return 'w-12 h-12';
     if (value >= 1) return 'w-11 h-11';
     if (value >= 0.25) return 'w-10 h-10';
@@ -58,7 +58,7 @@ const CoinDisplay: React.FC<CoinDisplayProps> = ({
           : 'bg-white/70 hover:bg-white hover:shadow-md group-hover:transform group-hover:scale-105'
         }
       `}>
-        {/* Coin/Bill Display */}
+        {/* Coin Display */}
         <div className={`
           ${getCoinSize(denomination)} 
           bg-gradient-to-br ${getCoinColor(denomination)} 
@@ -67,10 +67,10 @@ const CoinDisplay: React.FC<CoinDisplayProps> = ({
           ${isSelected ? 'animate-pulse' : ''}
           relative overflow-hidden
         `}>
-          {/* Shine effect */}
+          {/* Shine */}
           <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent"></div>
           
-          {/* Bill pattern for large denominations */}
+          {/* Bill for large denominations */}
           {isLargeDenomination && (
             <div className="absolute inset-0 opacity-10">
               <div className="absolute top-1 left-1 w-2 h-2 border border-white rounded-full"></div>
@@ -78,7 +78,7 @@ const CoinDisplay: React.FC<CoinDisplayProps> = ({
             </div>
           )}
           
-          {/* Coin ridges for circular coins */}
+          {/* ridges for coins */}
           {!isLargeDenomination && (
             <div className="absolute inset-0 rounded-full border-2 border-white/30"></div>
           )}

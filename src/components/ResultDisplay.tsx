@@ -89,7 +89,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, formatCurrency })
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-4">
-                        {/* Single Coin Display */}
+                        {/* Single coin  */}
                         <div className={`
                           ${getCoinSize(coin.denomination)} 
                           bg-gradient-to-br ${getCoinColor(coin.denomination)} 
@@ -114,7 +114,7 @@ const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, formatCurrency })
                         </div>
                       </div>
 
-                      {/* Multiple Coins Animation */}
+                      {/* Multiple coins */}
                       <div className="flex items-center gap-1 overflow-hidden">
                         {Array.from({ length: Math.min(coin.count, 5) }, (_, i) => (
                           <div

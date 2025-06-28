@@ -188,12 +188,12 @@ const CoinChangeCalculator: React.FC = () => {
           </p>
         </div>
 
-        {/* Simple Bank Building Container */}
+        {/* Bank Building Container */}
         <div className="relative mb-8">
           {/* Bank Building */}
           <div className="bg-stone-200 rounded-lg shadow-lg overflow-hidden">
             
-            {/* Simple Bank Roof */}
+            {/* Bank Roof */}
             <div className="h-12 bg-gray-600 clip-path-triangle relative">
               <div className="absolute top-1 left-1/2 transform -translate-x-1/2 w-4 h-6 bg-yellow-500 rounded-t-full"></div>
             </div>
@@ -207,9 +207,9 @@ const CoinChangeCalculator: React.FC = () => {
               </h2>
             </div>
 
-            {/* Simple Bank Facade */}
+            {/* Bank */}
             <div className="bg-stone-100 py-4">
-              {/* Simple Windows */}
+              {/* Windows */}
               <div className="flex justify-center gap-6 mb-4">
                 {[...Array(3)].map((_, i) => (
                   <div key={i} className="w-12 h-8 bg-blue-900 rounded border-2 border-yellow-600"></div>
@@ -217,10 +217,10 @@ const CoinChangeCalculator: React.FC = () => {
               </div>
             </div>
 
-            {/* Bank Interior/Form Area */}
+            {/* Bank Interior */}
             <div className="p-6 bg-yellow-50 min-h-[500px]">
               
-              {/* Connection Status & API URL */}
+              {/* Connection Status and API url */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
                 <div className="lg:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -250,7 +250,7 @@ const CoinChangeCalculator: React.FC = () => {
                 </div>
               </div>
 
-              {/* Amount Input */}
+              {/* Input amount */}
               <div className="mb-6">
                 <label className="block text-base font-medium text-gray-700 mb-2">
                   Amount to Exchange ($)
@@ -284,7 +284,7 @@ const CoinChangeCalculator: React.FC = () => {
                 />
               </div>
 
-              {/* Action Buttons */}
+              {/* Buttons */}
               <div className="flex gap-3 justify-center mb-6">
                 <button
                   onClick={calculateCoins}
@@ -360,7 +360,7 @@ const CoinChangeCalculator: React.FC = () => {
             </div>
           </div>
           <p className="mt-3 text-xs text-gray-500 italic">
-            💡 Tip: Set VITE_API_URL environment variable to change the default API URL
+            
           </p>
         </div>
       </div>
