@@ -23,25 +23,25 @@ const CoinSelector: React.FC<CoinSelectorProps> = ({
     <div className="mb-8">
       <div className="flex justify-between items-center mb-4">
         <label className="text-lg font-semibold text-gray-700">
-          Available Coin Denominations
+          Available Denominations
         </label>
         <div className="flex gap-3">
           <button
             onClick={onSelectAll}
-            className="px-4 py-2 text-sm bg-green-100 hover:bg-green-200 text-green-700 border border-green-300 rounded-lg transition-colors duration-200"
+            className="px-4 py-2 text-sm bg-green-100 hover:bg-green-200 text-green-700 border border-green-300 rounded-lg transition-colors"
           >
             Select All
           </button>
           <button
             onClick={onClearAll}
-            className="px-4 py-2 text-sm bg-red-100 hover:bg-red-200 text-red-700 border border-red-300 rounded-lg transition-colors duration-200"
+            className="px-4 py-2 text-sm bg-red-100 hover:bg-red-200 text-red-700 border border-red-300 rounded-lg transition-colors"
           >
             Clear All
           </button>
         </div>
       </div>
       
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 p-6 bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl border-2 border-yellow-200">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 p-6 bg-gray-50 rounded-xl border">
         {validDenominations.map((denomination) => (
           <CoinDisplay
             key={denomination}

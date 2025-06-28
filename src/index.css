@@ -104,10 +104,3 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
-
-/* Simple bank building styles */
-@layer utilities {
-  .clip-path-triangle {
-    clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
-  }
-}
