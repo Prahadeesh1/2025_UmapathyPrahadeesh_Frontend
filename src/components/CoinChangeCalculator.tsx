@@ -190,101 +190,121 @@ const CoinChangeCalculator: React.FC = () => {
           </p>
         </div>
 
-        {/* Main Container */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
+        {/* Bank Building Container */}
+        <div className="bank-building relative">
+          {/* Bank Roof */}
+          <div className="bank-roof"></div>
           
-          {/* Connection Status & API URL */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
-            <div className="lg:col-span-2">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                API Connection
-              </label>
-              <input
-                type="text"
-                value={apiUrl}
-                onChange={(e) => setApiUrl(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="http://localhost:8080"
-              />
-            </div>
-            <div className="flex flex-col justify-end">
-              <div className="bg-gray-50 p-3 rounded-md border flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  {getConnectionIcon()}
-                  <span className="font-medium text-sm">{getConnectionStatusText()}</span>
+          {/* Bank Sign */}
+          <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 bg-blue-800 text-white px-6 py-2 rounded text-lg font-bold z-10">
+            COIN EXCHANGE BANK
+          </div>
+          
+          {/* Bank Windows */}
+          <div className="bank-windows">
+            <div className="bank-window"></div>
+            <div className="bank-window"></div>
+            <div className="bank-window"></div>
+          </div>
+          
+          {/* Main Bank Content */}
+          <div className="bank-interior p-8">
+            {/* Connection Status & API URL */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+              <div className="lg:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  API Connection
+                </label>
+                <input
+                  type="text"
+                  value={apiUrl}
+                  onChange={(e) => setApiUrl(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="http://localhost:8080"
+                />
+              </div>
+              <div className="flex flex-col justify-end">
+                <div className="bg-gray-50 p-3 rounded-md border flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    {getConnectionIcon()}
+                    <span className="font-medium text-sm">{getConnectionStatusText()}</span>
+                  </div>
+                  <button
+                    onClick={checkApiHealth}
+                    className="px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded transition-colors"
+                  >
+                    Refresh
+                  </button>
                 </div>
-                <button
-                  onClick={checkApiHealth}
-                  className="px-2 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded transition-colors"
-                >
-                  Refresh
-                </button>
               </div>
             </div>
-          </div>
 
-          {/* Amount Input */}
-          <div className="mb-6">
-            <label className="block text-base font-medium text-gray-700 mb-2">
-              Amount to Exchange ($)
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <span className="text-gray-500">$</span>
+            {/* Amount Input */}
+            <div className="mb-6">
+              <label className="block text-base font-medium text-gray-700 mb-2">
+                Amount to Exchange ($)
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span className="text-gray-500">$</span>
+                </div>
+                <input
+                  type="number"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  min="0"
+                  max="10000"
+                  step="0.01"
+                  className="w-full pl-8 pr-3 py-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="Enter amount (e.g., 0.41)"
+                />
               </div>
-              <input
-                type="number"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                min="0"
-                max="10000"
-                step="0.01"
-                className="w-full pl-8 pr-3 py-3 text-lg border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Enter amount (e.g., 0.41)"
-              />
+            </div>
+
+            {/* Coin Selection */}
+            <CoinSelector
+              validDenominations={validDenominations}
+              selectedDenominations={selectedDenominations}
+              onDenominationChange={handleDenominationChange}
+              onSelectAll={selectAllDenominations}
+              onClearAll={clearAllDenominations}
+              formatCurrency={formatCurrency}
+            />
+
+            {/* Action Buttons */}
+            <div className="flex gap-3 justify-center mb-6">
+              <button
+                onClick={calculateCoins}
+                disabled={loading || connectionStatus === 'disconnected'}
+                className={`px-6 py-3 rounded-md font-medium flex items-center gap-2 ${
+                  loading || connectionStatus === 'disconnected'
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-blue-600 hover:bg-blue-700'
+                } text-white transition-colors`}
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  <>
+                    <Coins className="w-4 h-4" />
+                    Calculate Exchange
+                  </>
+                )}
+              </button>
+              <button
+                onClick={clearForm}
+                className="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white rounded-md font-medium transition-colors"
+              >
+                Clear All
+              </button>
             </div>
           </div>
-
-          {/* Coin Selection */}
-          <CoinSelector
-            validDenominations={validDenominations}
-            selectedDenominations={selectedDenominations}
-            onDenominationChange={handleDenominationChange}
-            onSelectAll={selectAllDenominations}
-            onClearAll={clearAllDenominations}
-            formatCurrency={formatCurrency}
-          />
-
-          {/* Action Buttons */}
-          <div className="flex gap-3 justify-center mb-6">
-            <button
-              onClick={calculateCoins}
-              disabled={loading || connectionStatus === 'disconnected'}
-              className={`px-6 py-3 rounded-md font-medium flex items-center gap-2 ${
-                loading || connectionStatus === 'disconnected'
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-700'
-              } text-white transition-colors`}
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  Processing...
-                </>
-              ) : (
-                <>
-                  <Coins className="w-4 h-4" />
-                  Calculate Exchange
-                </>
-              )}
-            </button>
-            <button
-              onClick={clearForm}
-              className="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white rounded-md font-medium transition-colors"
-            >
-              Clear All
-            </button>
-          </div>
+          
+          {/* Bank Foundation */}
+          <div className="bank-foundation"></div>
         </div>
 
         {/* Error Display */}

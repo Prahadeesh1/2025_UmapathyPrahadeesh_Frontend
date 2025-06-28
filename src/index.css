@@ -104,3 +104,50 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Bank Building Styles */
+.bank-building {
+  background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.bank-roof {
+  width: 0;
+  height: 0;
+  border-left: 300px solid transparent;
+  border-right: 300px solid transparent;
+  border-bottom: 50px solid #6c757d;
+  margin: 0 auto;
+  position: relative;
+  top: -20px;
+}
+
+.bank-windows {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 60px;
+  background: #dee2e6;
+  border-bottom: 2px solid #adb5bd;
+}
+
+.bank-window {
+  width: 80px;
+  height: 60px;
+  background: #495057;
+  border: 3px solid #6c757d;
+  border-radius: 4px;
+}
+
+.bank-interior {
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+  min-height: 400px;
+}
+
+.bank-foundation {
+  height: 20px;
+  background: linear-gradient(to bottom, #adb5bd, #6c757d);
+  border-top: 2px solid #868e96;
+}
