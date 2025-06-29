@@ -31,7 +31,7 @@ const CoinChangeCalculator: React.FC = () => {
   const [result, setResult] = useState<CCResponse | null>(null);
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-  const [apiUrl, setApiUrl] = useState<string>(import.meta.env.VITE_API_URL || 'http://localhost:8080');
+  const [apiUrl, setApiUrl] = useState<string>(import.meta.env.VITE_API_URL || 'http://13.215.249.135:8080');
   const [connectionStatus, setConnectionStatus] = useState<'checking' | 'connected' | 'disconnected'>('checking');
 
   // Health check on component mount and when API URL changes
